@@ -12,11 +12,11 @@ public class Main {
     public static void main(String[] args) throws TelegramApiException {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         try {
-            log.info("Registering bot...");
+            log.info("Запускаємо бота...");
             telegramBotsApi.registerBot(new MessageCalculator());
         } catch (TelegramApiException e){
-            log.error("Failed to register bot(check internet connection / bot token or make sure only one instance of bot is running).", e);
+            log.error("Помилка запуску: перевірте інтернет-з'єднання та коректність токену.\t", e);
         }
-        log.info("Telegram bot is ready to accept updates from user...");
+        log.info("Телеграм-бот чекає на повідомлення...");
     }
 }
