@@ -12,7 +12,7 @@ public class MessageCalculator extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return null;
+        return "CountingMessagesBot";
     }
 
     @Override
