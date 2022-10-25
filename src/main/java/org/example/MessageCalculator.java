@@ -7,25 +7,34 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
+import java.util.Properties;
+
 public class MessageCalculator extends TelegramLongPollingBot {
+    private PropertiesFileReader propertiesFileReader = new PropertiesFileReader();
+    private Properties prop;
+    {
+        try {
+            prop = propertiesFileReader.readPropertiesFile("src/main/resources/config.properties");
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
     private static final Logger log = LoggerFactory.getLogger(Main.class);
     private int messageCount = 0;
     private String botsAnswer;
 
     @Override
     public String getBotUsername() {
-        return "Bot";
+        return prop.getProperty("name");
     }
-
     @Override
     public String getBotToken() {
-        return "***";
+        return prop.getProperty("token");
     }
 
     @Override
     public void onUpdateReceived(Update update) {
-
-
         if (update.hasMessage() && update.getMessage().hasText()) {
             String textFromUser = update.getMessage().getText();
             Long userId = update.getMessage().getChatId();
