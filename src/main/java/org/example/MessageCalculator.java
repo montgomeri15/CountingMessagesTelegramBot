@@ -26,11 +26,11 @@ public class MessageCalculator extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return prop.getProperty("name");
+        return prop.getProperty("telegram.bot.username");
     }
     @Override
     public String getBotToken() {
-        return prop.getProperty("token");
+        return prop.getProperty("telegram.bot.token");
     }
 
     @Override
