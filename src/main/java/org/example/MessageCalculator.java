@@ -36,13 +36,14 @@ public class MessageCalculator extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
+
             String textFromUser = update.getMessage().getText();
             Long userId = update.getMessage().getChatId();
             String userFirstName = update.getMessage().getFrom().getFirstName();
 
             log.info("[{}, {}] : {}", userId, userFirstName, textFromUser);
             messageCount++;
-            botsAnswer = (textFromUser == "Стоп") ?
+            botsAnswer = (textFromUser.equals("Стоп")) ?
                     "Всього повідомлень:\t" + messageCount :
                     "Повідомлення №" + messageCount + " від " + userFirstName;
 
@@ -55,8 +56,6 @@ public class MessageCalculator extends TelegramLongPollingBot {
             } catch (TelegramApiException e) {
                 log.error("Помилка при відправленні повідомлення:\t", e);
             }
-        } else {
-            log.warn("Неочікувана дія від користувача");
         }
     }
 }
